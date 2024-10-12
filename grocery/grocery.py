@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 app = Flask (__name__)
 app.secret_key="delunoalnueve"
-
+ 
 
 #04 🛒 Grocery
 # Diseña un programa de lista de compras que pueda:
