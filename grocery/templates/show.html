@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar Lista</title>
+</head>
+<body>
+    <h1>Lista de Compras</h1>
+    <ul>
+        {% for nombre, (cant, price) in items.items() %}
+            <li>{{ nombre }}: {{ cant }} a ${{ price }} cada uno</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

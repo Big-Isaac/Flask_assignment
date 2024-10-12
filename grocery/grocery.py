@@ -80,7 +80,51 @@ def index():
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
-    if request.method=="POST":
+    if request.method == "POST":
         nombre = request.form["nombre"]
-        cant = request.form["cant"]
-        price = request.form["price"]
+        cant = int(request.form["cant"])
+        price = float(request.form["price"])
+        lista.add(nombre, cant, price)
+        return redirect(url_for("index"))
+    return render_template("add.html")
+
+
+@app.route("/show")
+def show():
+    return render_template("show.html", items=lista.items)
+
+
+@app.route("/delete", methods=["GET", "POST"])
+def delete():
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        lista.delete(nombre)
+        return redirect(url_for("index"))
+    return render_template("delete.html")
+
+
+@app.route("/pagar")
+def pagar():
+    total = lista.pagar()
+    return render_template("pagar.html", total=total)
+
+
+@app.route("/save", methods=["GET", "POST"])
+def save():
+    if request.method == "POST":
+        archivo = request.form["archivo"]
+        lista.save(archivo)
+        return redirect(url_for("index"))
+    return render_template("save.html")
+
+
+@app.route("/load", methods=["GET", "POST"])
+def load():
+    if request.method == "POST":
+        archivo = request.form["archivo"]
+        lista.load(archivo)
+        return redirect(url_for("index"))
+    return render_template("load.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
